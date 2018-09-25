@@ -1,0 +1,12 @@
+#!/bin/bash -e
+cat <<EOF
+This is an S2I SpringBoot v2.0 Final centos base image responsible for consuming a MAVEN project.
+To use it, install S2I: https://github.com/guirui/s2i-springboot.
+
+Sample invocation:
+
+s2i build https://github.com/guirui/springboot-sample.git springboot-centos7 springboot-sample
+
+You can then run the resulting image via:
+docker run springboot-sample
+EOF

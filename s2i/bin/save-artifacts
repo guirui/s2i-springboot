@@ -1,0 +1,22 @@
+#!/bin/sh -e
+#
+# S2I save-artifacts script for the 'springboot-centos7' image.
+# The save-artifacts script streams a tar archive to standard output.
+# The archive contains the files and folders you want to re-use in the next build.
+#
+# For more information see the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+# tar cf - <list of files and folders>
+
+pushd ${HOME} >/dev/null
+
+# ${HOME}/.m2 is the maven repo dir
+# {$HOME}/target is the class files from the previous build
+if [ -d ./target ]; then
+    tar cf - ./.m2 ./target
+else
+    tar cf - ./.m2
+fi
+
+popd >/dev/null

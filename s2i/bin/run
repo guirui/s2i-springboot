@@ -1,0 +1,17 @@
+#!/bin/bash -e
+#
+# S2I run script for the 'springboot-centos7' image.
+# The run script executes the server that runs your application.
+#
+# For more information see the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+ARTIFACT_DIR=${ARTIFACT_DIR:-target}
+APP_TARGET_DIR=$HOME/$ARTIFACT_DIR
+
+echo "---> Starting Spring Boot application"
+echo "--> # APP_TARGET = $APP_TARGET_DIR"
+echo "--> # JAVA_OPTS = $JAVA_OPTS"
+echo "---> Running application from standalone jar/war..."
+java $JAVA_OPTS -jar `find $APP_TARGET_DIR -maxdepth 1 -regex ".*\(jar\|war\)"`
